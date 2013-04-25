@@ -52,8 +52,10 @@ module.exports = function(grunt) {
                     });
 
                     write.on('close', function () {
-                        grunt.verbose.writeln('Moved ' + file + ' to ' + dest);
+                        // Now remove original file
+                        grunt.file.delete(file);
 
+                        grunt.verbose.writeln('Moved ' + file + ' to ' + dest);
                         done();
                     });
 
