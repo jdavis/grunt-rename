@@ -1,6 +1,6 @@
 # grunt-rename
 
-[![Build Status](https://travis-ci.org/jdavis/grunt-rename.png)](https://travis-ci.org/jdavis/grunt-rename) [![Dependency Status](https://david-dm.org/jdavis/grunt-rename.png)](https://david-dm.org/jdavis/grunt-rename)
+[![Build Status](https://travis-ci.org/jdavis/grunt-rename.png)](https://travis-ci.org/jdavis/grunt-rename) [![NPM version](https://badge.fury.io/js/grunt-rename.png)](http://badge.fury.io/js/grunt-rename) [![Dependency Status](https://david-dm.org/jdavis/grunt-rename.png)](https://david-dm.org/jdavis/grunt-rename)
 
 > Move and/or rename files.
 
