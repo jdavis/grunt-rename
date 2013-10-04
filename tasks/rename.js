@@ -13,12 +13,26 @@ var fs = require('fs'),
 
 module.exports = function(grunt) {
     grunt.registerMultiTask('rename', 'Move and/or rename files.', function() {
-        var options = this.options(),
-            done = this.async();
+        var done = this.async(),
+            options = this.options({
+                ignore: false,
+            });
 
+        console.log(options);
         this.files.forEach(function (f) {
             var dest = f.dest,
                 dir = path.dirname(dest);
+
+            // Check if no source files were found
+            if (f.src.length === 0) {
+                // Continue if ignore is set
+                if (options.ignore) {
+                    return done();
+                } else {
+                    grunt.fail.warn('Could not move file to ' + f.dest + ' it did not exist.')
+                    return done();
+                }
+            }
 
             f.src.filter(function (file) {
                 // Resolve some conflicts because path doesn't work as I would
@@ -43,12 +57,12 @@ module.exports = function(grunt) {
 
                     read.on('error', function (err) {
                         grunt.fail.warn('Failed to read ' + file);
-                        done();
+                        return done();
                     });
 
                     write.on('error', function (err) {
                         grunt.fail.warn('Failed to write to ' + dest);
-                        done();
+                        return done();
                     });
 
                     write.on('close', function () {
@@ -56,7 +70,7 @@ module.exports = function(grunt) {
                         grunt.file.delete(file);
 
                         grunt.verbose.writeln('Moved ' + file + ' to ' + dest);
-                        done();
+                        return done();
                     });
 
                     read.pipe(write);
