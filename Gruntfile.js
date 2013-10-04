@@ -64,6 +64,14 @@ module.exports = function(grunt) {
                 src: 'test/files/8',
                 dest: 'eight'
             },
+
+            eleven: {
+                src: 'test/files/11',
+                dest: 'tmp/eleven',
+                options: {
+                    ignore: true,
+                }
+            }
         },
 
         // Unit tests.
