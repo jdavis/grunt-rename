@@ -26,9 +26,9 @@ module.exports = function(grunt) {
         },
 
         clean: {
+            tests: ['test/files/'],
+            tmp: ['tmp/'],
             one: ['6', '7', 'eight'],
-            tmp: ['tmp'],
-            tests: ['test/files/']
         },
 
         rename: {
