@@ -44,7 +44,12 @@ grunt.initConfig({
 
 ### Options
 
-None! Talk about easy, right?
+#### options.ignore
+Type: `Boolean`
+
+Default value: `false`
+
+Ignore if the source file doesn't exist.
 
 ## Contributing
 Feel free to fork it and add as you please. If you add a particularly nice
