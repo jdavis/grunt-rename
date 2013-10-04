@@ -1,7 +1,7 @@
 {
     "name": "grunt-rename",
     "description": "Move and/or rename files.",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "homepage": "https://github.com/jdavis/grunt-rename",
 
     "author": {
