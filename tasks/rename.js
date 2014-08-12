@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                 if (options.ignore) {
                     return done();
                 } else {
-                    grunt.fail.warn('Could not move file to ' + f.dest + ' it did not exist.')
+                    grunt.fail.warn('Could not move file to ' + f.dest + ' it did not exist.');
                     return done();
                 }
             }
