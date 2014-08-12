@@ -18,7 +18,13 @@ module.exports = function(grunt) {
                 ignore: false,
             });
 
-        console.log(options);
+        //console.log(options);
+
+        if (!this.files.length) {
+            grunt.log.writeln('Moved '+'0'.cyan+' files.');
+            return done();
+        }
+
         this.files.forEach(function (f) {
             var dest = f.dest,
                 dir = path.dirname(dest);
@@ -48,6 +54,7 @@ module.exports = function(grunt) {
                 fs.rename(file, dest, function (err) {
                     // Easy peasy
                     if (!err) {
+                        grunt.verbose.writeln('Moved ' + file + ' to ' + dest);
                         return done();
                     }
 
