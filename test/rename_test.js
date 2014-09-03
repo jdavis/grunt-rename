@@ -82,4 +82,27 @@ exports.rename = {
         test.ok(!grunt.file.exists('test/files/8'), 'test/files/8 should NOT exist');
         test.done();
     },
+
+    nineAndTen: function(test) {
+        test.expect(5);
+        test.ok(grunt.file.exists('tmp/tmp/tmp/9'), 'tmp/tmp/tmp/9 should exist');
+        test.ok(grunt.file.exists('tmp/tmp/tmp/10'), 'tmp/tmp/tmp/10 should exist');
+        test.ok(!grunt.file.exists('test/files/9'), 'test/files/9 should NOT exist');
+        test.ok(!grunt.file.exists('test/files/10'), 'test/files/10 should NOT exist');
+        test.equal(grunt.file.read('test/files/sleep'), 'Slept', 'Sleep should have finished');
+        test.done();
+    },
+
+    twoHundreds: function(test) {
+        test.expect(7);
+        test.ok(grunt.file.exists('tmp/20/test/files/201'), 'tmp/20/test/files/201 should exist');
+        test.ok(grunt.file.exists('tmp/20/test/files/202'), 'tmp/20/test/files/202 should exist');
+        test.ok(grunt.file.exists('tmp/20/test/files/203'), 'tmp/20/test/files/203 should exist');
+        test.ok(!grunt.file.exists('test/files/201'), 'test/files/201 should NOT exist');
+        test.ok(!grunt.file.exists('test/files/202'), 'test/files/202 should NOT exist');
+        test.ok(!grunt.file.exists('test/files/203'), 'test/files/203 should NOT exist');
+        test.equal(grunt.file.read('test/files/sleep'), 'Slept', 'Sleep should have finished');
+        test.done();
+    },
+
 };
