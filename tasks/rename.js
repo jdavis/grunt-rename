@@ -13,10 +13,12 @@ var fs = require('fs'),
 
 module.exports = function(grunt) {
     grunt.registerMultiTask('rename', 'Move and/or rename files.', function() {
-        var done = this.async(),
-            options = this.options({
+        var options = this.options({
                 ignore: false,
+                execSync: false
             });
+            
+        var done = options.execSync ? (function(){}) : this.async();
 
         //console.log(options);
 
