@@ -64,13 +64,21 @@ module.exports = function(grunt) {
                 src: 'test/files/8',
                 dest: 'eight'
             },
-
+            nineAndTen: {
+                src: ['test/files/9', 'test/files/10'],
+                dest: 'tmp/tmp/tmp/'
+            },
             eleven: {
                 src: 'test/files/11',
                 dest: 'tmp/eleven',
                 options: {
                     ignore: true,
                 }
+            },
+            twoHundreds: {
+                expand: true,
+                src: 'test/files/20*',
+                dest: 'tmp/20/'
             }
         },
 
@@ -91,10 +99,21 @@ module.exports = function(grunt) {
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'make', 'rename', 'nodeunit', 'clean']);
+    grunt.registerTask('test', ['clean', 'make', 'rename', 'sleep', 'nodeunit', 'clean']);
 
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'test']);
+
+    grunt.registerTask('sleep', function () {
+        var done = this.async();
+
+        grunt.file.write('test/files/sleep', 'Sleeping');
+
+        setTimeout(function() {
+            grunt.file.write('test/files/sleep', 'Slept');
+            done();
+        }, 10000);
+    });
 
     grunt.registerTask('make', function () {
         var p = './test/files/';
@@ -102,5 +121,9 @@ module.exports = function(grunt) {
         for(var i = 1; i <= 10; i++) {
             grunt.file.write(path.join(p, '' + i, ''));
         }
+
+        grunt.file.write(path.join(p, '201', ''));
+        grunt.file.write(path.join(p, '202', ''));
+        grunt.file.write(path.join(p, '203', ''));
     });
 };
