@@ -9,7 +9,8 @@
 'use strict';
 
 var fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    async = require('async');
 
 module.exports = function(grunt) {
     grunt.registerMultiTask('rename', 'Move and/or rename files.', function() {
@@ -25,7 +26,7 @@ module.exports = function(grunt) {
             return done();
         }
 
-        this.files.forEach(function (f) {
+        async.eachLimit(this.files, 5, function (f, cb) {
             var dest = f.dest,
                 dir = path.dirname(dest);
 
@@ -33,10 +34,10 @@ module.exports = function(grunt) {
             if (f.src.length === 0) {
                 // Continue if ignore is set
                 if (options.ignore) {
-                    return done();
+                    return cb();
                 } else {
                     grunt.fail.warn('Could not move file to ' + f.dest + ' it did not exist.');
-                    return done();
+                    return cb();
                 }
             }
 
@@ -55,7 +56,7 @@ module.exports = function(grunt) {
                     // Easy peasy
                     if (!err) {
                         grunt.verbose.writeln('Moved ' + file + ' to ' + dest);
-                        return done();
+                        return cb();
                     }
 
                     // Now fallback to copying/unlinking
@@ -64,12 +65,14 @@ module.exports = function(grunt) {
 
                     read.on('error', function (err) {
                         grunt.fail.warn('Failed to read ' + file);
-                        return done();
+                        cb && cb();
+                        cb = null;
                     });
 
                     write.on('error', function (err) {
                         grunt.fail.warn('Failed to write to ' + dest);
-                        return done();
+                        cb && cb();
+                        cb = null;
                     });
 
                     write.on('close', function () {
@@ -77,12 +80,13 @@ module.exports = function(grunt) {
                         grunt.file.delete(file);
 
                         grunt.verbose.writeln('Moved ' + file + ' to ' + dest);
-                        return done();
+                        cb && cb();
+                        cb = null;
                     });
 
                     read.pipe(write);
                 });
             });
-        });
+        }, done);
     });
 };
