@@ -3,50 +3,41 @@
     "description": "Move and/or rename files.",
     "version": "0.1.4",
     "homepage": "https://github.com/jdavis/grunt-rename",
-
     "author": {
         "name": "Josh Davis",
         "email": "josh@joshldavis.com",
         "url": "http://joshldavis.com"
     },
-
     "repository": {
         "type": "git",
         "url": "git://github.com/jdavis/grunt-rename.git"
     },
-
     "bugs": {
         "url": "https://github.com/jdavis/grunt-rename/issues"
     },
-
-    "licenses": [{
-        "type": "MIT",
-        "url": "https://github.com/jdavis/grunt-rename/blob/master/LICENSE-MIT"
-    }],
-
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/jdavis/grunt-rename/blob/master/LICENSE-MIT"
+        }
+    ],
     "main": "Gruntfile.js",
-
     "engines": {
         "node": ">= 0.8.0"
     },
-
     "scripts": {
         "test": "grunt test"
     },
-
     "dependencies": {},
-
     "devDependencies": {
         "grunt-contrib-jshint": "~0.1.1",
         "grunt-contrib-clean": "~0.4.0",
         "grunt-contrib-nodeunit": "~0.1.2",
         "grunt": "~0.4.1"
     },
-
     "peerDependencies": {
-        "grunt": "~0.4.1"
+        "grunt": ">=0.4.0"
     },
-
     "keywords": [
         "gruntplugin",
         "move",
